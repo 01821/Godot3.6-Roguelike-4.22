@@ -13,6 +13,7 @@ script = ExtResource("2_d321e")
 [node name="Navigation" type="Node2D" parent="." index="4"]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation" index="0"]
+unique_name_in_owner = true
 debug_enabled = true
 
 [node name="PathTimer" type="Timer" parent="Navigation" index="1"]

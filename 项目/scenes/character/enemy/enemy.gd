@@ -3,7 +3,8 @@ class_name Enemy
 
 var path:PackedVector2Array
 
-@onready var navigation_agent_2d:NavigationAgent2D = $Navigation/NavigationAgent2D
+@onready var navigation_agent_2d:NavigationAgent2D = %NavigationAgent2D
+
 @onready var player_node:CharacterBody2D = get_tree().current_scene.get_node("Player")
 @onready var path_timer = $Navigation/PathTimer
 
