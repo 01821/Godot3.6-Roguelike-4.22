@@ -32,3 +32,9 @@ func get_input():
 		
 	if Input.is_action_pressed("attack") and not sword_animation_player.is_playing():
 		sword_animation_player.play("attack")
+
+func switch_camera():
+	var main_scene_camera:Camera2D = get_parent().get_node("Camera2D")
+	main_scene_camera.position = position
+	get_node("Camera2D").set_enabled(false)
+	main_scene_camera.set_enabled(true)

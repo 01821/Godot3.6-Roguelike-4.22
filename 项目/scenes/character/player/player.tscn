@@ -227,9 +227,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"switch_camera"
+}, {
 "args": [],
 "method": &"queue_free"
 }]
@@ -537,3 +540,8 @@ visible = false
 position = Vector2(15, 0)
 texture = ExtResource("7_ol118")
 hframes = 3
+
+[node name="Camera2D" type="Camera2D" parent="." index="5"]
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
