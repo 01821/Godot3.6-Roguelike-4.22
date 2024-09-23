@@ -289,6 +289,7 @@ radius = 5.0
 [node name="FlyingCreature" instance=ExtResource("1_eb2oh")]
 script = ExtResource("2_ahv0q")
 FRICTION = 0.7
+fly = true
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_xcnu4")

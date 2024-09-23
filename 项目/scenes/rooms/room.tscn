@@ -382,6 +382,8 @@ format = 2
 
 [node name="Doors" type="Node2D" parent="."]
 
+[node name="Traps" type="Node2D" parent="."]
+
 [node name="EnemyPositions" type="Node2D" parent="."]
 
 [node name="PlayerDetector" type="Area2D" parent="."]

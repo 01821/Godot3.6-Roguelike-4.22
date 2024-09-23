@@ -4,14 +4,33 @@ class_name Hitbox
 @export var damage:int = 1
 var knockback_direction:Vector2 = Vector2.ZERO
 @export var knockback_force:int = 800
-
+var body_inside:bool = false
+@onready var timer:Timer = Timer.new()
 @onready var collision_shape:CollisionShape2D = get_child(0)
 
 func _init():
-	connect("body_entered",_on_body_entered)
+	var __ = connect("body_entered",_on_body_entered)
+	__ = connect("body_exited",_on_body_exited)
 	
 func _ready():
 	assert(collision_shape != null)
+	timer.wait_time = 1
+	add_child(timer)
 
 func _on_body_entered(body:PhysicsBody2D):
-	body.take_damage(damage,knockback_direction,knockback_force)
+	body_inside = true
+	timer.start()
+	while body_inside:
+		_collide(body)
+		await timer.timeout
+
+func _on_body_exited(body:PhysicsBody2D):
+	body_inside = false
+	timer.stop()
+
+func _collide(body:PhysicsBody2D):
+	if body == null or not body.has_method("take_damage"):
+		queue_free()
+	else:
+		body.take_damage(damage,knockback_direction,knockback_force)
+

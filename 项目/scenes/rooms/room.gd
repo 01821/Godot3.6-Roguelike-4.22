@@ -4,7 +4,9 @@ const SPAWN_EXPLOSION_SCENE = preload("res://scenes/character/enemy/spawn_explos
 
 const ENEMY_SCENES:Dictionary = {
 	"FLYING_CREATURE":
-		preload("res://scenes/character/enemy/FlyingCreature/flying_creature.tscn" )
+		preload("res://scenes/character/enemy/FlyingCreature/flying_creature.tscn" ),
+	"GOBLIN":
+		preload("res://scenes/character/enemy/Goblin/goblin.tscn" )
 }
 
 var num_enemies:int
@@ -19,12 +21,6 @@ var num_enemies:int
 func _ready():
 	num_enemies = enemy_positions.get_child_count()
 	
-	#var previous_room_door:StaticBody2D = get_node("Doors/Door")
-	#var exit_tile_pos:Vector2 = tile_map.local_to_map(previous_room_door.position)
-	#tile_map.set_cell(0,exit_tile_pos,0,Vector2(3,5))
-	#
-	#var corridor_height:int = randi() % 5 + 2
-	#
 func _open_doors():
 	for door in doors.get_children():
 		door.open()
@@ -35,7 +31,14 @@ func _close_entrance():
 		
 func _spwan_enemies():
 	for enemy_position in enemy_positions.get_children():
-		var enemy:CharacterBody2D = ENEMY_SCENES.FLYING_CREATURE.instantiate()
+		var enemy:CharacterBody2D
+		#enemy = ENEMY_SCENES.GOBLIN.instantiate()
+		enemy = ENEMY_SCENES.FLYING_CREATURE.instantiate()
+		#if randi() % 2 == 0:
+			#enemy = ENEMY_SCENES.FLYING_CREATURE.instantiate()
+		#else:
+			#enemy = ENEMY_SCENES.GOBLIN.instantiate()
+			
 		enemy.connect("tree_exited",_on_enemy_killed)
 		enemy.global_position = enemy_position.position
 		call_deferred("add_child",enemy)

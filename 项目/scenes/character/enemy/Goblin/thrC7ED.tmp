@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnadgjell3vo2"]
+
+[ext_resource type="Script" path="res://scenes/character/enemy/Goblin/throwable_knike.gd" id="1_0ooph"]
+[ext_resource type="Texture2D" uid="uid://o0uareiip565" path="res://Art/v1.1 dungeon crawler 16X16 pixel pack/enemies/goblin/goblin_knife.png" id="1_rvfkn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uqp7k"]
+radius = 1.3931
+height = 11.6317
+
+[node name="ThrowableKnike" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_0ooph")
+damage = null
+knockback_force = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.96047e-08, -1.19209e-07)
+rotation = 0.612364
+shape = SubResource("CapsuleShape2D_uqp7k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rvfkn")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

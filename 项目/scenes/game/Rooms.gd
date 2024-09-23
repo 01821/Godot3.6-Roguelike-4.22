@@ -3,7 +3,8 @@ extends Node2D
 const SPAWN_ROOMS:Array = [preload("res://scenes/rooms/spawn_room_0.tscn"),
 preload("res://scenes/rooms/spawn_room_1.tscn")]
 const INTERMEDIATE_ROOMS:Array = [preload("res://scenes/rooms/room_0.tscn"),
-preload("res://scenes/rooms/room1.tscn")]
+preload("res://scenes/rooms/room1.tscn"),
+preload("res://scenes/rooms/room_2.tscn")]
 const END_ROOMS:Array = [preload("res://scenes/rooms/end_room_0.tscn")]
 
 const TILE_SIZE:int = 16
@@ -36,11 +37,11 @@ func _spawn_rooms():
 			var exit_tile_pos:Vector2 = previous_room_tilemap.local_to_map(previous_room_door.position)
 			exit_tile_pos = exit_tile_pos + Vector2.UP
 			var corridor_height:int = randi() % 5 + 2
-			for y in corridor_height:
-				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(-2,-y),0,LEFT_WALL_TILE_INDEX)
-				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(-1,-y),0,FLOOR_TILE_INDEX)
-				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(0,-y),0,FLOOR_TILE_INDEX)
-				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(1,-y),0,RIGHT_WALL_TILE_INDEX)
+			for y in corridor_height-1:
+				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(-2,-y-1),0,LEFT_WALL_TILE_INDEX)
+				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(-1,-y-1),0,FLOOR_TILE_INDEX)
+				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(0,-y-1),0,FLOOR_TILE_INDEX)
+				previous_room_tilemap.set_cell(0,exit_tile_pos+Vector2(1,-y-1),0,RIGHT_WALL_TILE_INDEX)
 			
 			var room_tilemap:TileMap = room.get_node("TileMap")
 			room.position = previous_room_door.global_position + Vector2.UP * room_tilemap.get_used_rect().size.y *TILE_SIZE + Vector2.UP * (1 + corridor_height) * TILE_SIZE + Vector2.LEFT *room_tilemap.local_to_map(room.get_node("Entrance/Marker2D2").position).x * TILE_SIZE

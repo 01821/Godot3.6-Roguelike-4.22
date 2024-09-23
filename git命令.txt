@@ -1,0 +1,6 @@
+git更新：
+git add *
+git commit -m “给上传文件的备注、提示之类”
+git remote add main https://github.com/01821/Godot3.6-Roguelike-4.22.git
+git pull --rebase origin main
+git push -u origin main
