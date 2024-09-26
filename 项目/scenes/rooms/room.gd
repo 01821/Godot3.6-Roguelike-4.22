@@ -32,12 +32,10 @@ func _close_entrance():
 func _spwan_enemies():
 	for enemy_position in enemy_positions.get_children():
 		var enemy:CharacterBody2D
-		#enemy = ENEMY_SCENES.GOBLIN.instantiate()
-		enemy = ENEMY_SCENES.FLYING_CREATURE.instantiate()
-		#if randi() % 2 == 0:
-			#enemy = ENEMY_SCENES.FLYING_CREATURE.instantiate()
-		#else:
-			#enemy = ENEMY_SCENES.GOBLIN.instantiate()
+		if randi() % 2 == 0:
+			enemy = ENEMY_SCENES.FLYING_CREATURE.instantiate()
+		else:
+			enemy = ENEMY_SCENES.GOBLIN.instantiate()
 			
 		enemy.connect("tree_exited",_on_enemy_killed)
 		enemy.global_position = enemy_position.position

@@ -8,7 +8,7 @@ radius = 1.3931
 height = 11.6317
 
 [node name="ThrowableKnike" type="Area2D"]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_0ooph")
 

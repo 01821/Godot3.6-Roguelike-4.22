@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://chboek48utc7i"]
+
+[ext_resource type="PackedScene" uid="uid://cx1ao4tlt1t1y" path="res://scenes/weapons/weapon.tscn" id="1_fpkqu"]
+[ext_resource type="Texture2D" uid="uid://becor3vxddjfu" path="res://Art/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/WarHammer.png" id="2_f6vks"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0273y"]
+radius = 29.0
+height = 66.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d3yom"]
+radius = 8.0
+height = 20.0
+
+[node name="WarHammer" instance=ExtResource("1_fpkqu")]
+
+[node name="Sprite2D" parent="Node2D" index="0"]
+position = Vector2(6.00001, -1.60907)
+scale = Vector2(0.275755, 0.275755)
+texture = ExtResource("2_f6vks")
+
+[node name="CollisionShape2D" parent="Node2D/Sprite2D/Hitbox" index="0"]
+position = Vector2(2.8284, -1.4142)
+shape = SubResource("CapsuleShape2D_0273y")
+
+[node name="CollisionShape2D" parent="Node2D/PlayerDetector" index="0"]
+position = Vector2(6.00001, -2.99998)
+shape = SubResource("CapsuleShape2D_d3yom")

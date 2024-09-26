@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://h4g0vtctwqym"]
+[gd_scene load_steps=5 format=3 uid="uid://h4g0vtctwqym"]
 
 [ext_resource type="PackedScene" uid="uid://b8e63ut66y3br" path="res://scenes/rooms/room.tscn" id="1_bjgi3"]
 [ext_resource type="PackedScene" uid="uid://dx5cxjb7qklan" path="res://scenes/rooms/door.tscn" id="2_yonem"]
+[ext_resource type="PackedScene" uid="uid://chboek48utc7i" path="res://scenes/weapons/WarHammer/war_hammer.tscn" id="3_wjymm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_moehh"]
 size = Vector2(64, 37)
@@ -17,9 +18,13 @@ layer_0/tile_data = PackedInt32Array(327681, 131072, 6, 327682, 131072, 6, 32768
 [node name="Door" parent="Doors" index="0" instance=ExtResource("2_yonem")]
 position = Vector2(80, 16)
 
+[node name="PlayerSpawnPos" type="Marker2D" parent="." index="6"]
+position = Vector2(128, 145)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(81, 51.5)
 shape = SubResource("RectangleShape2D_moehh")
 
-[node name="PlayerSpawnPos" type="Marker2D" parent="." index="6"]
-position = Vector2(128, 145)
+[node name="WarHammer" parent="." index="8" instance=ExtResource("3_wjymm")]
+position = Vector2(166, 60)
+on_floor = true

@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://donkunjy32pdx"]
+
+[ext_resource type="Script" path="res://scenes/character/player/dust.gd" id="1_ach8o"]
+[ext_resource type="Texture2D" uid="uid://qmanr13nlkir" path="res://Art/v1.1 dungeon crawler 16X16 pixel pack/effects (new)/hit_effect_anim_f0.png" id="1_e3ryn"]
+
+[sub_resource type="Animation" id="Animation_t32yl"]
+resource_name = "new_animation"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_t86ic"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scy7d"]
+_data = {
+"RESET": SubResource("Animation_t86ic"),
+"new_animation": SubResource("Animation_t32yl")
+}
+
+[node name="Dust" type="Sprite2D"]
+texture = ExtResource("1_e3ryn")
+script = ExtResource("1_ach8o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_scy7d")
+}

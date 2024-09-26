@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://cx1ao4tlt1t1y"]
+
+[ext_resource type="Shader" path="res://scenes/character/player/white.gdshader" id="1_7ey3g"]
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_hropk"]
+[ext_resource type="Script" path="res://scenes/weapons/WeaponHitbox.gd" id="2_5dct7"]
+[ext_resource type="Animation" uid="uid://ba085uvsp0un2" path="res://scenes/character/player/anim/attack.res" id="4_1iunq"]
+[ext_resource type="Animation" uid="uid://mjl3ydkesv1m" path="res://scenes/character/player/anim/cancel_attack.res" id="5_par5k"]
+[ext_resource type="Animation" uid="uid://x3fe4e22ip22" path="res://scenes/character/player/anim/charge.res" id="6_2tjqp"]
+[ext_resource type="Animation" uid="uid://byrh3maokq6nk" path="res://scenes/character/player/anim/circular_attack.res" id="7_2jgx6"]
+[ext_resource type="Animation" uid="uid://clpo87oa6wd8i" path="res://scenes/character/player/anim/RESET.res" id="8_hgi2w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vy8pa"]
+shader = ExtResource("1_7ey3g")
+shader_parameter/active = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_esqi1"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 80.0
+tangential_accel_max = 80.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgfu0"]
+_data = {
+"RESET": ExtResource("8_hgi2w"),
+"attack": ExtResource("4_1iunq"),
+"cancel_attack": ExtResource("5_par5k"),
+"charge": ExtResource("6_2tjqp"),
+"circular_attack": ExtResource("7_2jgx6")
+}
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_hropk")
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = -1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+material = SubResource("ShaderMaterial_vy8pa")
+position = Vector2(7, 3)
+rotation = -0.785398
+offset = Vector2(5, -4)
+
+[node name="Hitbox" type="Area2D" parent="Node2D/Sprite2D"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("2_5dct7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Sprite2D/Hitbox"]
+position = Vector2(4.94975, -3.53553)
+rotation = 0.785398
+disabled = true
+
+[node name="ChargeParticles" type="GPUParticles2D" parent="Node2D/Sprite2D"]
+unique_name_in_owner = true
+position = Vector2(4.94973, -3.53551)
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_esqi1")
+lifetime = 0.6
+
+[node name="PlayerDetector" type="Area2D" parent="Node2D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PlayerDetector"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_pgfu0")
+}
+
+[connection signal="area_entered" from="Node2D/Sprite2D/Hitbox" to="Node2D/Sprite2D/Hitbox" method="_on_area_entered"]
+[connection signal="body_entered" from="Node2D/PlayerDetector" to="." method="_on_player_detector_body_entered"]
