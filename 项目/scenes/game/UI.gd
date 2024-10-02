@@ -7,7 +7,7 @@ var max_hp:int = 4
 @onready var texture_progress_bar:TextureProgressBar = $TextureProgressBar
 
 func _ready():
-	max_hp = player.hp
+	max_hp = player.max_hp
 	_update_health_bar(100)
 
 func _update_health_bar(new_value:int):

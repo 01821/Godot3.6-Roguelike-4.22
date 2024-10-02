@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwkt4aass152d"]
+[gd_scene load_steps=7 format=3 uid="uid://dwkt4aass152d"]
 
 [ext_resource type="PackedScene" uid="uid://cx1ao4tlt1t1y" path="res://scenes/weapons/weapon.tscn" id="1_tysdu"]
 [ext_resource type="Texture2D" uid="uid://dfjpn32a4niej" path="res://Art/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/weapon_sword_1.png" id="2_ov74g"]
+[ext_resource type="Shader" path="res://scenes/character/player/white.gdshader" id="2_vstsb"]
 [ext_resource type="Texture2D" uid="uid://dgkp6av5ndtvq" path="res://Art/v1.1 dungeon crawler 16X16 pixel pack/effects (new)/slash_effect_anim_spritesheet.png" id="3_36okt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vcaew"]
+resource_local_to_scene = true
+shader = ExtResource("2_vstsb")
+shader_parameter/active = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qviuu"]
 radius = 4.00001
@@ -11,6 +17,7 @@ height = 18.0001
 [node name="Sword" instance=ExtResource("1_tysdu")]
 
 [node name="Sprite2D" parent="Node2D" index="0"]
+material = SubResource("ShaderMaterial_vcaew")
 texture = ExtResource("2_ov74g")
 
 [node name="CollisionShape2D" parent="Node2D/Sprite2D/Hitbox" index="0"]

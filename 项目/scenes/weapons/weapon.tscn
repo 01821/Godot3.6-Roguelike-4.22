@@ -10,6 +10,7 @@
 [ext_resource type="Animation" uid="uid://clpo87oa6wd8i" path="res://scenes/character/player/anim/RESET.res" id="8_hgi2w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vy8pa"]
+resource_local_to_scene = true
 shader = ExtResource("1_7ey3g")
 shader_parameter/active = false
 

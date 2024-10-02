@@ -1,10 +1,13 @@
 extends Node2D
+class_name Room
 
 const SPAWN_ROOMS:Array = [preload("res://scenes/rooms/spawn_room_0.tscn"),
 preload("res://scenes/rooms/spawn_room_1.tscn")]
 const INTERMEDIATE_ROOMS:Array = [preload("res://scenes/rooms/room_0.tscn"),
 preload("res://scenes/rooms/room1.tscn"),
 preload("res://scenes/rooms/room_2.tscn")]
+const SPECIAL_ROOMS:Array = [
+preload("res://scenes/rooms/special_room_1.tscn")]
 const END_ROOMS:Array = [preload("res://scenes/rooms/end_room_0.tscn")]
 
 const TILE_SIZE:int = 16
@@ -21,6 +24,7 @@ func _ready():
 
 func _spawn_rooms():
 	var previous_room:Node2D
+	var special_room_spawned:bool = false
 	for i in num_levels:
 		var room:Node2D
 		if i == 0:
@@ -31,7 +35,13 @@ func _spawn_rooms():
 				room = END_ROOMS[randi() % END_ROOMS.size()].instantiate()
 			else:
 				room = INTERMEDIATE_ROOMS[randi() % INTERMEDIATE_ROOMS.size()].instantiate()
-
+				
+			if (randi() % 3 == 0 and not special_room_spawned) or (i == num_levels - 2 and not special_room_spawned):
+				room = SPECIAL_ROOMS[randi() % SPECIAL_ROOMS.size()].instantiate()
+				special_room_spawned = true
+			else:
+				room = INTERMEDIATE_ROOMS[randi() % INTERMEDIATE_ROOMS.size()].instantiate()
+				
 			var previous_room_tilemap:TileMap = previous_room.get_node("TileMap")
 			var previous_room_door:StaticBody2D = previous_room.get_node("Doors/Door")
 			var exit_tile_pos:Vector2 = previous_room_tilemap.local_to_map(previous_room_door.position)

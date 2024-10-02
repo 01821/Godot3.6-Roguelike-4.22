@@ -4,6 +4,7 @@ class_name Character
 @export var FRICTION:float = 0.15
 @export var accerelation:int = 40
 @export var max_speed:int = 100
+@export var max_hp:int = 2
 @export var hp:int = 2:set = set_hp
 signal hp_changed(new_hp)
 var move_direction:Vector2 = Vector2.ZERO
@@ -23,6 +24,8 @@ func move():
 func take_damage(dam:int,dir:Vector2,force:int):
 	if state_machine.state != state_machine.states.hurt and state_machine.state != state_machine.states.dead :
 		self.hp -= dam
+		if name == "Player":
+			SavedData.hp = self.hp
 		_spawn_hit_effect()
 		if hp > 0:
 			state_machine.set_state(state_machine.states.hurt)
@@ -32,7 +35,7 @@ func take_damage(dam:int,dir:Vector2,force:int):
 			velocity += dir * force * 2
 
 func set_hp(new_hp:int):
-	hp = new_hp
+	hp = clamp(new_hp,0,max_hp)
 	emit_signal("hp_changed",new_hp)
 
 func _spawn_hit_effect():

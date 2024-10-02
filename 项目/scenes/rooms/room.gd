@@ -55,4 +55,5 @@ func _on_player_detector_body_entered(body:CharacterBody2D):
 		_close_entrance()
 		_spwan_enemies()
 	else:
+		_close_entrance()
 		_open_doors()

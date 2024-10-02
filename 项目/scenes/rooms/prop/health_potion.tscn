@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://l70htr7bf78n"]
+
+[ext_resource type="Script" path="res://scenes/rooms/prop/health_potion.gd" id="1_646yu"]
+[ext_resource type="Texture2D" uid="uid://v3msqckom2hf" path="res://Art/v1.1 dungeon crawler 16X16 pixel pack/props_itens/potion_red.png" id="1_yqvtl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_55qnn"]
+radius = 4.0
+height = 12.0
+
+[node name="HealthPotion" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_646yu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yqvtl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_55qnn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
